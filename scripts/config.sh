@@ -36,7 +36,8 @@ fi
 
 export PANZA_EMBEDDING_MODEL="sentence-transformers/all-mpnet-base-v2" # embedding model for RAG; can be changed, trading off speed for quality
 
-export PANZA_RAG_RELEVANCE_THRESHOLD=0.2 # emails whose relevance is above this threshold will be presented for RAG 
+export PANZA_RAG_RELEVANCE_THRESHOLD=0.2 # emails whose relevance is above this threshold will be presented for RAG
+export PANZA_RAG_NUM_EMAILS=3  # maximum number of emails to use for RAG
 
 export PANZA_SEED=42 # the one true seed
 

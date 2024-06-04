@@ -26,4 +26,5 @@ python ${INFERENCE_SCRIPT} \
     --db-path=${PANZA_DATA_DIR} \
     --index-name=${PANZA_USERNAME} \
     --rag-relevance-threshold=${PANZA_RAG_RELEVANCE_THRESHOLD} \
+    --rag-num-emails=${PANZA_RAG_NUM_EMAILS} \
     ${USE_RAG}

@@ -139,6 +139,8 @@ python ${EVAL_SCRIPT} \
   --embedding-model=${PANZA_EMBEDDING_MODEL} \
   --db-path=${PANZA_DATA_DIR} \
   --index-name=${PANZA_USERNAME} \
+  --rag-relevance-threshold=${PANZA_RAG_RELEVANCE_THRESHOLD} \
+  --rag-num-emails=${PANZA_RAG_NUM_EMAILS} \
   --use-rag
 
 echo "find the finetuned model at ${BASE_SAVE_PATH}/models/${RUN_NAME}"
