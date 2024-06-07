@@ -34,6 +34,11 @@ def generate_experiments(sweep_config):
                     command = f"./train_rosa.sh PANZA_DATA_DIR={panza_data_dir} PANZA_USERNAME={username} DATA_PATH={data_path} LR={lr} LORA_LR={lr} NUM_EPOCHS={epochs} PANZA_FINETUNE_WITH_PREAMBLE={preamble} PANZA_USER_PREAMBLE_PATH={preamble_path}"
                     command = f"cd {SCRIPTS_DIR_ROOT} && {command}"
                     commands.append(command)
+            for epochs in user_json["LORA_EPOCHS"]:
+                for lr in user_json["LORA_LR"]:
+                    command = f"./train_rosa.sh PANZA_DATA_DIR={panza_data_dir} PANZA_USERNAME={username} DATA_PATH={data_path} LR=0.0 LORA_LR={lr} NUM_EPOCHS={epochs} PANZA_FINETUNE_WITH_PREAMBLE={preamble} PANZA_USER_PREAMBLE_PATH={preamble_path}"
+                    command = f"cd {SCRIPTS_DIR_ROOT} && {command}"
+                    commands.append(command)
 
     return commands
 

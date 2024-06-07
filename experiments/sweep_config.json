@@ -4,49 +4,59 @@
       "user_nick": "jeff",
       "data_dir": "jeff_llama3",
       "ROSA_LR": [1e-3, 1e-4, 1e-5, 1e-6],
+      "LORA_LR": [1e-3, 1e-4, 1e-5, 1e-6],
       "FFT_LR": [1e-4, 1e-5, 1e-6],
       "PREAMBLE": [1],
       "RAFT": [0, 1],
-      "ROSA_EPOCHS": [5, 7, 9]
+      "ROSA_EPOCHS": [5, 7, 9],
+      "LORA_EPOCHS": [5, 7, 9]
   },
   {
       "user_name": "david_anonymous",
       "user_nick": "david",
       "data_dir": "david_llama3",
       "ROSA_LR": [1e-3, 1e-4, 1e-5, 1e-6],
+      "LORA_LR": [1e-3, 1e-4, 1e-5, 1e-6],
       "FFT_LR": [1e-4, 1e-5, 1e-6],
       "PREAMBLE": [1],
       "RAFT": [0, 1],
-      "ROSA_EPOCHS": [5, 7, 9]
+      "ROSA_EPOCHS": [5, 7, 9],
+      "LORA_EPOCHS": [5, 7, 9]
   },
   {
       "user_name": "kay_brown",
       "user_nick": "kay",
       "data_dir": "kay_llama3",
       "ROSA_LR": [1e-3, 1e-4, 1e-5, 1e-6],
+      "LORA_LR": [1e-3, 1e-4, 1e-5, 1e-6],
       "FFT_LR": [1e-4, 1e-5, 1e-6],
       "PREAMBLE": [1],
       "RAFT": [0, 1],
-      "ROSA_EPOCHS": [5, 7, 9]
+      "ROSA_EPOCHS": [5, 7, 9],
+      "LORA_EPOCHS": [5, 7, 9]
   },
   {
       "user_name": "shackleton_sara",
       "user_nick": "sara",
       "data_dir": "sara_llama3",
       "ROSA_LR": [1e-3, 1e-4, 1e-5, 1e-6],
+      "LORA_LR": [1e-3, 1e-4, 1e-5, 1e-6],
       "FFT_LR": [1e-4, 1e-5, 1e-6],
       "PREAMBLE": [1],
       "RAFT": [0, 1],
-      "ROSA_EPOCHS": [5, 7, 9]
+      "ROSA_EPOCHS": [5, 7, 9],
+      "LORA_EPOCHS": [5, 7, 9]
   },
   {
       "user_name": "tana_williams",
       "user_nick": "tana",
       "data_dir": "tana_llama3",
       "ROSA_LR": [1e-3, 1e-4, 1e-5, 1e-6],
+      "LORA_LR": [1e-3, 1e-4, 1e-5, 1e-6],
       "FFT_LR": [1e-4, 1e-5, 1e-6],
       "PREAMBLE": [1],
       "RAFT": [0, 1],
-      "ROSA_EPOCHS": [5, 7, 9]
+      "ROSA_EPOCHS": [5, 7, 9],
+      "LORA_EPOCHS": [5, 7, 9]
   }
 ]
