@@ -13,7 +13,6 @@ export NUM_EPOCHS=3
 export WARMUP=20 # the learning rate warmup (batches)
 export BS=8
 export PER_DEVICE_BS=1
-export SEED=${PANZA_SEED}
 
 if [[ ${MODEL_TYPE} == llama3 ]]; then
     export LR=1e-5 # learning rate
@@ -42,6 +41,8 @@ do
 done
 
 echo "Using Learning Rate ${LR} for ${MODEL_TYPE} model"
+
+export SEED=${PANZA_SEED}
 
 export WANDB_PROJECT="panza-${PANZA_USERNAME}"
 

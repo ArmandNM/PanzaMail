@@ -17,7 +17,6 @@ export LORA_ALPHA=16
 export SCHEDULE=wl16 # the RoSA schedule
 export SPA_NUM_GRADS=1 # number of gradients used for mask generation
 export SPA_GRAD_ACC_MODE=mean_squared # 'mean' or 'mean_squared': how to accumulate gradients
-export SEED=${PANZA_SEED}
 
 if [[ ${MODEL_TYPE} == llama3 ]]; then
     export LR=1e-5 # learning rate
@@ -56,6 +55,8 @@ do
 done
 
 echo "Using Learning Rate ${LR} and LoRA LR ${LORA_LR} for ${MODEL_TYPE} model"
+
+export SEED=${PANZA_SEED}
 
 export WANDB_PROJECT="panza-${PANZA_USERNAME}"
 
