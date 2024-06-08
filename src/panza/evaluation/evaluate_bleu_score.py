@@ -154,7 +154,7 @@ def main():
     for prompt_info in prompt_scores.values():
         flattened_golden += ([prompt_info["golden"][0]])*len(prompt_info['output'])
         flattened_outputs += prompt_info['output']
-    mauve_score = mauve.compute(predictions=flattened_outputs, references=flattened_golden) 
+    mauve_score = mauve.compute(predictions=flattened_outputs, references=flattened_golden, device_id=0)
     print("MAUVE score", mauve_score)
     means["MAUVE"] = mauve_score.mauve
     print("Mean scores across all prompts: ", {f"    {k}: {v}" for k, v in means.items()})
