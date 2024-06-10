@@ -38,6 +38,7 @@ def get_base_inference_args_parser():
     parser.add_argument("--dtype", type=str, default="bf16")
     parser.add_argument("--nthreads", type=int, default=None)
     parser.add_argument("--load-in-4bit", default=False, action="store_true")
+    parser.add_argument("--seed", type=int, default=42)
 
     return parser
 

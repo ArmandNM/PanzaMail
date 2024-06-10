@@ -37,8 +37,9 @@ def main():
     parser.add_argument("--golden", type=str, default=None)
     parser.add_argument("--batch-size", type=int, default=1)
     parser.add_argument("--wandb-run-id", type=str, default=None)
+    parser.add_argument("--outputs-dir", type=str, default=None)
     args = parser.parse_args()
-    
+
     rouge = ROUGEScore()
     # This library computes the BLEU score components separately. We do not use a length penalty.
     bleu1 = BLEUScore(n_gram=1)
@@ -170,11 +171,20 @@ def main():
         print({f"EVAL/{k}-{rag_str}mean": v for k, v in means.items()})
         print({f"EVAL/{k}-{rag_str}min": v for k, v in mins.items()})
 
-    with open(os.path.join(args.model, f"{rag_str}eval_responses.txt"), 'w') as f:
-        json.dump(prompt_scores, f, ensure_ascii=False, indent=4)
+    if not args.outputs_dir:
+        with open(os.path.join(args.model, f"{rag_str}eval_responses.txt"), 'w') as f:
+            json.dump(prompt_scores, f, ensure_ascii=False, indent=4)
 
-    with open(os.path.join(args.model, f"{rag_str}eval_summary.txt"), 'w') as f:
-        json.dump({"means": means, "mins": mins}, f, ensure_ascii=False, indent=4)
+        with open(os.path.join(args.model, f"{rag_str}eval_summary.txt"), 'w') as f:
+            json.dump({"means": means, "mins": mins}, f, ensure_ascii=False, indent=4)
+    else:
+        model_name = args.model.split("/")[-1]
+        user_name = args.golden.split("/")[-2].split("_")[0]
+        log_base_name = f"{rag_str}{model_name}_seed{args.seed}_{user_name}"
+        with open(os.path.join(args.outputs_dir, f"{log_base_name}_responses"), 'w') as f:
+            json.dump(prompt_scores, f, ensure_ascii=False, indent=4)
+        with open(os.path.join(args.outputs_dir, f"{log_base_name}_summary"), 'w') as f:
+            json.dump({"means": means, "mins": mins}, f, ensure_ascii=False, indent=4)
 
 if __name__ == "__main__":
     main()
