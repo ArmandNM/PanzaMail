@@ -30,7 +30,7 @@ GENERATIVE_MODELS = [
 ]
 
 USERS = [
-    ("david", "/nfs/scistore19/alistgrp/anicolic/repos/PanzaMailFork/data/david_llama3/david_anonymous_clean_summarized.jsonl"),
+    ("david", "/nfs/scistore19/alistgrp/anicolic/repos/PanzaMailFork/data/david_llama3/david_ground_truth_summaries.jsonl"),
 ]
 
 EMBEDDING_MODEL = "sentence-transformers/all-mpnet-base-v2"
