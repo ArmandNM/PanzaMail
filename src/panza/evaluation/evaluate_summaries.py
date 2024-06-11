@@ -13,19 +13,19 @@ import argparse
 import copy
 import json
 import os
+import random
 import re
 import string
 import sys
 import time
-from tqdm import tqdm
 from typing import Dict, List
-
-from evaluate import load
-from torchmetrics.text.rouge import ROUGEScore
-from torchmetrics.text.bleu import BLEUScore
 
 import numpy as np
 import torch
+from evaluate import load
+from torchmetrics.text.bleu import BLEUScore
+from torchmetrics.text.rouge import ROUGEScore
+from tqdm import tqdm
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 print(sys.path)
@@ -35,7 +35,6 @@ from panza.data_preparation.summarize_emails import LLMSummarizer
 TEMP = 0.7
 TOP_P = 0.7
 TOP_K = 50
-
 
 
 def generate_synthetic_instructions(emails: List[Dict], summarizer: LLMSummarizer):
@@ -81,7 +80,14 @@ def main():
     parser.add_argument("--load-in-4bit", default=False, action="store_true")
     parser.add_argument("--prompt-file", help="A path to file with prompt text")
     parser.add_argument("--use-email-as-golden", help="use email as the golden summary", action="store_true")
+    parser.add_argument("--outputs-dir", type=str, default=None)
+    parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args()
+
+    # Set random seed
+    torch.manual_seed(args.seed)
+    random.seed(args.seed)
+    np.random.seed(args.seed)
 
     assert args.golden_loc is None or args.golden_loc.endswith(
         ".jsonl"
@@ -111,7 +117,7 @@ def main():
                 return "golden_summary"
             return k
         golden_summaries = [{maybe_rename_summary(k):v for k, v in golden.items()} for golden in golden_summaries]
-    
+
 
     if args.model is not None:
         llm_summaries = golden_summaries
@@ -137,7 +143,7 @@ def main():
         for i in tqdm(range(0, len(llm_summaries), args.batch_size)):
             batch = llm_summaries[i : i + args.batch_size]
             summarized_emails +=generate_synthetic_instructions(batch, summarizer)
-  
+
     else:
         assert args.golden_loc is not None and args.summarized_emails_file is not None
         with open(args.summarized_emails_file, "r") as f:
@@ -184,8 +190,9 @@ def main():
     print(metric_means)
 
     if args.model is not None:
-        model_str = 'llama' if 'Llama' in args.model else 'mistral'
-        outfile = f"{os.environ.get('PANZA_WORKSPACE')}/data/summarization_results/{golden_loc}-{model_str}/"
+        model_str = args.model.split('/')[1]
+        golden_file = golden_loc.split('/')[-1].split('.')[0]
+        outfile = f"{args.outputs_dir}/{golden_file}-{model_str}-seed{args.seed}/"
     else:
         outfile = args.summarized_emails_file[:-len(".jsonl")] + "/"
     print("See results at", outfile)

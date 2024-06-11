@@ -8,7 +8,8 @@ from typing import Dict, List, Text
 
 import torch
 from tqdm import tqdm
-from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+from transformers import (AutoModelForCausalLM, AutoTokenizer,
+                          BitsAndBytesConfig)
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
@@ -35,9 +36,9 @@ class LLMSummarizer:
             )
         else:
             quant_config = None
-        
+
         self.model = AutoModelForCausalLM.from_pretrained(
-            model, torch_dtype=dtype, device_map=self.device, quantization_config=quant_config
+            model, torch_dtype=dtype, device_map=self.device, quantization_config=quant_config, trust_remote_code=True
         )
         self.tokenizer = AutoTokenizer.from_pretrained(
             model, model_max_length=self.model.config.max_position_embeddings
