@@ -15,7 +15,7 @@ EVAL_SCRIPT = abspath(
 
 
 EXPERIMENT_LOG_DIR = abspath(
-    join(CURRENT_DIR, "../results/summarization")
+    join(CURRENT_DIR, "../results/summarization_good")
 )  # Modify this accordingly
 if not exists(EXPERIMENT_LOG_DIR):
     makedirs(EXPERIMENT_LOG_DIR)
@@ -31,6 +31,7 @@ GENERATIVE_MODELS = [
 
 USERS = [
     ("david", "/nfs/scistore19/alistgrp/anicolic/repos/PanzaMailFork/data/david_llama3/david_ground_truth_summaries.jsonl"),
+    ("jamie", "/nfs/scistore19/alistgrp/eiofinov/panza_shared/jen_the_ground_truth_summaries.jsonl")
 ]
 
 EMBEDDING_MODEL = "sentence-transformers/all-mpnet-base-v2"
